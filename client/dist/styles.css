@@ -1,0 +1,17 @@
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid purple;
+}
+
+th {
+  border: 1px solid;
+  padding: 10px;
+}
+
+td {
+  border: 1px solid;
+  word-wrap: break-word;
+  padding: 10px;
+}
