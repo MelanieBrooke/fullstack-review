@@ -10,12 +10,9 @@ const RepoList = (props) => (
         <tr>
           <th>Repo Name</th>
           <th>Author Name</th>
-          <th>Link</th>
           <th>Created/Modified</th>
-          {/* <th>Modified</th> */}
           <th>Forks</th>
           <th>Watchers/Stargazers</th>
-          {/* <th>Stargazers</th> */}
         </tr>
           {props.repos.map((repo)=> {
             return <RepoFormat repo={repo} key={repo.gitID}/>
