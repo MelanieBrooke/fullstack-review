@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      repos: []
+      repos: [],
+      reposCount: 0
     }
 
   }
@@ -26,20 +27,21 @@ class App extends React.Component {
           type: "GET",
           url: 'http://localhost:1128/repos',
           success:(data)=>{
-            console.log('hey double ajax!');
-            console.log(data);
+            let repos = JSON.parse(data);
+            this.setState({
+              repos: repos,
+              reposCount: repos.length
+            })
           }
         })
       }
-      // dataType: dataType
-    });
-    // TODO
+    })
   }
 
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+      <RepoList repos={this.state.repos} count={this.state.reposCount}/>
       <Search onSearch={this.search.bind(this)}/>
     </div>)
   }

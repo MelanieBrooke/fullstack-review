@@ -47,11 +47,23 @@ let save = (ghObj) => {
   .then(result => {
     mongoose.connection.close();
   })
-
-
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
 }
 
+let access25 = () => {
+  console.log('access25');
+  mongoose.connect('mongodb://localhost/fetcher');
+  var db = mongoose.connection;
+  return Repo.find().sort({stargazers: 1}).limit(25);
+}
+
+
 module.exports.save = save;
+module.exports.access25 = access25;
+
+
+// module.exports = {
+//   save: save,
+//   access25: access25
+// };
+
+///rgskdlfnjbcmvs

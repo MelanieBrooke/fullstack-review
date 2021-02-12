@@ -31,9 +31,10 @@ app.post('/repos', function (req, res) {
 
 app.get('/repos', function (req, res) {
   console.log('get request successful');
-  access25();
+  database.access25()
+  .then(data => {res.end(JSON.stringify(data))})
 
-  res.end();
+  // res.end();
   // TODO - your code here!
   // This route should send back the top 25 repos
 });
@@ -45,22 +46,9 @@ app.listen(port, function() {
 });
 
 
-let access25 = () => {
-  console.log('access25');
-  mongoose.connect('mongodb://localhost/fetcher');
-  var db = mongoose.connection;
-  // console.log(db);
-  // console.log(db.collections.repos)
-  db.collections.repos.find();
-  // dbo = db.db('fetcher');
-  console.log('made it this far')
-  // db.Repo.find()
-  // db.find();
-  // .toArray(function(err, result) {
-  //   if (err) {
-  //     throw err;
-  //   } else {
-  //     console.log(result);
-  //     db.close();
-  //   }
-}
+// let access25 = () => {
+//   console.log('access25');
+//   mongoose.connect('mongodb://localhost/fetcher');
+//   var db = mongoose.connection;
+//   return db.collections.repos.find();
+// }
