@@ -14,6 +14,10 @@ class App extends React.Component {
 
   }
 
+  componentDidMount() {
+  this.getAndDisplay();
+  }
+
   search (term) {
     console.log(`${term} was searched`);
     $.ajax({
@@ -23,16 +27,31 @@ class App extends React.Component {
       contentType: 'application/json',
       success:()=>{
         console.log('success');
-        $.ajax({
-          type: "GET",
-          url: 'http://localhost:1128/repos',
-          success:(data)=>{
-            let repos = JSON.parse(data);
-            this.setState({
-              repos: repos,
-              reposCount: repos.length
-            })
-          }
+        this.getAndDisplay();
+        // $.ajax({
+        //   type: "GET",
+        //   url: 'http://localhost:1128/repos',
+        //   success:(data)=>{
+        //     let repos = JSON.parse(data);
+        //     this.setState({
+        //       repos: repos,
+        //       reposCount: repos.length
+        //     })
+        //   }
+        // })
+      }
+    })
+  }
+
+  getAndDisplay () {
+    $.ajax({
+      type: "GET",
+      url: 'http://localhost:1128/repos',
+      success:(data)=>{
+        let repos = JSON.parse(data);
+        this.setState({
+          repos: repos,
+          reposCount: repos.length
         })
       }
     })

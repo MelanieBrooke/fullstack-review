@@ -6,6 +6,7 @@ let repoSchema = mongoose.Schema({
   // Is this the right way to make a unique ID? Unsure
   gitID: {type: Number, unqiue: true},
   user: String,
+  userURL: String,
   // eventually refactor to use user from userSchema
   name: String,
   htmlURL: {type: String, unique: true},
@@ -32,6 +33,7 @@ let save = (ghObj) => {
   let github = new Repo({
     gitID: ghObj.id,
     user: ghObj.owner.login,
+    userURL: ghObj.owner.html_url,
     name: ghObj.name,
     htmlURL: ghObj.html_url,
     created: ghObj.created_at,
@@ -53,7 +55,7 @@ let access25 = () => {
   console.log('access25');
   mongoose.connect('mongodb://localhost/fetcher');
   var db = mongoose.connection;
-  return Repo.find().sort({stargazers: 1}).limit(25);
+  return Repo.find().sort({stargazers: -1}).limit(25);
 }
 
 
