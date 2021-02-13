@@ -4,7 +4,7 @@ import RepoFormat from './RepoFormat.jsx';
 const RepoList = (props) => (
   <div>
     <h4> Repo List Component </h4>
-    There are {props.count} repos.
+    Showing the top {props.count} repos from the users you've added to the database.
     <table id="repolist">
       <tbody>
         <tr>

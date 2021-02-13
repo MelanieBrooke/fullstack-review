@@ -20,13 +20,25 @@ let repoSchema = mongoose.Schema({
   stargazers: Number
 });
 
-// To create a user database later
-// let userSchema = mongoose.Schema({
-//   // use ObjectID to link this to the repo schema
-//   name: String
-// });
+let userSchema = mongoose.Schema({
+  username: {type: String, unique: true},
+  userURL: {type: String, unique: true}
+});
+
 
 let Repo = mongoose.model('Repo', repoSchema);
+let User = mongoose.model('User', userSchema);
+
+let saveUser = (userObj) => {
+  let user = new User({
+    username: userObj.owner.login,
+    userURL: userObj.owner.html_url
+  })
+  user.save()
+  .then(result => {
+    mongoose.connection.close();
+  })
+}
 
 
 let save = (ghObj) => {
@@ -58,7 +70,16 @@ let access25 = () => {
   return Repo.find().sort({stargazers: -1}).limit(25);
 }
 
+let viewUsers = () => {
+  console.log('viewUsers');
+  mongoose.connect('mongodb://localhost/fetcher');
+  var db = mongoose.connection;
+  return User.find();
+}
+
 
 module.exports.save = save;
 module.exports.access25 = access25;
+module.exports.saveUser = saveUser;
+module.exports.viewUsers = viewUsers;
 
