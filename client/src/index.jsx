@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
+// require("dotenv").config();
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +14,6 @@ class App extends React.Component {
       repos: [],
       reposCount: 0
     }
-
   }
 
   componentDidMount() {
@@ -20,25 +22,16 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
+    console.log(process.env.REACT_APP_PORT);
     $.ajax({
       type: "POST",
-      url:'http://localhost:1128/repos',
+      // url:`http://localhost:${process.env.PORT}/repos`,
+      url:`http://localhost:8626/repos`,
       data: JSON.stringify({term}),
       contentType: 'application/json',
       success:()=>{
         console.log('success');
         this.getAndDisplay();
-        // $.ajax({
-        //   type: "GET",
-        //   url: 'http://localhost:1128/repos',
-        //   success:(data)=>{
-        //     let repos = JSON.parse(data);
-        //     this.setState({
-        //       repos: repos,
-        //       reposCount: repos.length
-        //     })
-        //   }
-        // })
       }
     })
   }
@@ -46,7 +39,8 @@ class App extends React.Component {
   getAndDisplay () {
     $.ajax({
       type: "GET",
-      url: 'http://localhost:1128/repos',
+      // url: `http://localhost:${process.env.PORT}/repos`,
+      url: `http://localhost:8626/repos`,
       success:(data)=>{
         let repos = JSON.parse(data);
         this.setState({

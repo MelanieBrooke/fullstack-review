@@ -62,10 +62,3 @@ let access25 = () => {
 module.exports.save = save;
 module.exports.access25 = access25;
 
-
-// module.exports = {
-//   save: save,
-//   access25: access25
-// };
-
-///rgskdlfnjbcmvs

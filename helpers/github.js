@@ -7,7 +7,8 @@ let getReposByUsername = (username) => {
     url: githubURL,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${config.TOKEN}`
+      // 'Authorization': `token ${config.TOKEN}`
+      'Authorization': `token ${process.env.GITHUB_TOKEN}`
     }
   };
   return axios.get(githubURL, options);

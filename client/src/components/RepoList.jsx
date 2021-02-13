@@ -20,6 +20,6 @@ const RepoList = (props) => (
       </tbody>
     </table>
   </div>
-)
+);
 
 export default RepoList;
